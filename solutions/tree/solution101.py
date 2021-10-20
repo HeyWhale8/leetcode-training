@@ -3,16 +3,11 @@ from solutions.utils.tree import TreeNode
 
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
-
-
-
         def compare(node1, node2):
             if node1 is None and node2 is None:
                 return True
             if not node1 or not node2:
                 return False
-
-
             return node1.val == node2.val and compare(node1.left, node2.right) and compare(node1.right, node2.left)
 
         return compare(root, root)
