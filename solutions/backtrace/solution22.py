@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        def backtrack(left, right, trace):
+        def backtrace(left, right, trace):
             if left > right: return
             if left < 0 or right < 0:
                 return
@@ -11,16 +11,16 @@ class Solution:
                 res.append(trace)
                 return
             trace += "("
-            backtrack(left - 1, right, trace)
+            backtrace(left - 1, right, trace)
             trace = trace[0:-1]
 
             trace += ")"
-            backtrack(left, right - 1, trace)
+            backtrace(left, right - 1, trace)
             # trace = trace[0:-1]
 
         res = []
         trace = ""
-        backtrack(n, n, trace)
+        backtrace(n, n, trace)
         return res
 
 

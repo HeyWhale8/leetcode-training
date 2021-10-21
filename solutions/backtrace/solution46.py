@@ -3,7 +3,7 @@ from typing import List
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        def backtrack(nums, path, length):
+        def backtrace(nums, path, length):
             # 将path添加到res结果中
             if len(path) == length:
                 res.append(path.copy())
@@ -12,12 +12,12 @@ class Solution:
                 nums_copy.remove(nums[i])
                 # 做选择
                 path.append(nums[i])
-                backtrack(nums_copy, path, length)
+                backtrace(nums_copy, path, length)
                 # 撤销选择
                 path.pop()
 
         res = []
-        backtrack(nums, [], len(nums))
+        backtrace(nums, [], len(nums))
 
         return res
 
