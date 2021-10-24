@@ -10,8 +10,48 @@ from typing import List
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
         board = [['.'] * n for _ in range(n)]
-        print(board)
-        return []
+        res = []
 
+        def backtrace(board, row):
+            if row == n:
+                temp_res = []
+                for temp in board:
+                    temp_str = "".join(temp)
+                    temp_res.append(temp_str)
+                res.append(temp_res)
 
+                return
+            for col in range(n):
+                if meet(board, row, col):
+                    board[row][col] = 'Q'
+                    backtrace(board, row + 1)
+                    board[row][col] = '.'
 
+        def meet(board, row, col):
+            for i in range(n):
+                if board[i][col] == "Q":
+                    return False
+            # 判断左上角是否冲突
+            i = row - 1
+            j = col - 1
+            while i >= 0 and j >= 0:
+                if board[i][j] == 'Q':
+                    return False
+                i -= 1
+                j -= 1
+            # 判断右上角是否冲突
+            i = row - 1
+            j = col + 1
+            while i >= 0 and j < len(board):
+                if board[i][j] == 'Q':
+                    return False
+                i -= 1
+                j += 1
+            return True
+
+        backtrace(board, 0)
+        return res
+if __name__ == '__main__':
+    solution = Solution()
+    ans = solution.solveNQueens(4)
+    print(ans)
