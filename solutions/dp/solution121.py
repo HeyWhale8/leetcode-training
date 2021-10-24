@@ -19,18 +19,23 @@ class Solution:
 
     def maxProfit2(self, prices: List[int]) -> int:
         profit = 0
-        temp = 0
+        cur_sum = 0
+        # cur_sum > 0 则在当前卖出能得到的利润 cur_sum < 0 说明有更低的买入点，
         for i in range(1, len(prices)):
-            temp += prices[i] - prices[i - 1]
-            if temp < 0:
-                temp = 0
-            if temp > profit:
-                profit = temp
+            cur_sum += prices[i] - prices[i - 1]
+            if cur_sum < 0:
+                cur_sum = 0
+            # else:
+            #     profit = max(profit,cur_sum)
+            if cur_sum > profit:
+                profit = cur_sum
         return profit
 
 
 if __name__ == '__main__':
-    prices = [7,1,5,3,6,4]
+    prices = [2, 9, 1, 7]
     solution = Solution()
     ans = solution.maxProfit(prices)
+    print(ans)
+    ans = solution.maxProfit2(prices)
     print(ans)
